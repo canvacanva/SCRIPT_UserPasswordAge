@@ -2,17 +2,12 @@
 
 ```
 #################################################################################################################
-#
+#Fork of (and thanks to):
 # Password-Expiration-Notifications v20180412
 # Highly Modified fork. https://gist.github.com/meoso/3488ef8e9c77d2beccfd921f991faa64
-#
 # Originally from v1.4 @ https://gallery.technet.microsoft.com/Password-Expiry-Email-177c3e27
-# Robert Pearman (WSSMB MVP)
-# TitleRequired.com
-# Script to Automated Email Reminders when Users Passwords due to Expire.
-#
+# Robert Pearman (WSSMB MVP
 # Requires: Windows PowerShell Module for Active Directory
-#
 ##################################################################################################################
 # Please Configure the following variables....
 $SearchBase="DC=CORP,DC=DOMAIN,DC=IT"
@@ -24,7 +19,7 @@ $logging = $true # Set to $false to Disable Logging
 $logNonExpiring = $false
 $logFile = "\\export\\PS-pwd-expiry.csv" # ie. c:\mylog.csv
 $testing = $false # Set to $false to Email Users
-$adminEmailAddr = "passwordexpired@amergroup.it" #multiple addr allowed but MUST be independent strings separated by comma
+$adminEmailAddr = "passwordexpired@COMPANY" #multiple addr allowed but MUST be independent strings separated by comma
 $sampleEmails = 1 #number of sample email to send to adminEmailAddr when testing ; in the form $sampleEmails="ALL" or $sampleEmails=[0..X] e.g. $sampleEmails=0 or $sampleEmails=3 or $sampleEmails="all" are all valid.
 #
 ###################################################################################################################
@@ -122,10 +117,8 @@ foreach ($user in $users) {
     $body="
     <p>Password for user <b>$sName</b>  $messageDays.  When expired, you will not able to access shared folders, services and WiFi.</p>
     <p>Change now your password typing CTRL + ALT + CANC and select CHANGE PASSWORD.</p>
-    <p>If you are not located into AmerGroup site, you can use the Web Portal https://weboffice.corp.amergroup.it/ for change your password using Self Service Password Reset</p>
     <p>Thanks<br>
-    ICT AMER GROUP<br>
-    itsm@amergroup.it<br>
+
     </p>
     "
 
@@ -164,7 +157,7 @@ foreach ($user in $users) {
             }
         } else {
             Write-Host "$dName ($sName) has no email address."
-            Send-Mailmessage -smtpServer $smtpServer -from $from -to itsm@amergroup.it -subject $subject -body $body -bodyasHTML -priority High -Encoding $textEncoding -ErrorAction Stop -ErrorVariable err
+            Send-Mailmessage -smtpServer $smtpServer -from $from -to itsm@COMPANY -subject $subject -body $body -bodyasHTML -priority High -Encoding $textEncoding -ErrorAction Stop -ErrorVariable err
             $sent = "Yes"
            
         }
