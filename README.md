@@ -1,4 +1,6 @@
 # SCRIPT_UserPasswordAge
+Run with Task manager:
+powershell -ExecutionPolicy Bypass -file \\source\PSW_Expired\PasswordExpireNotification.ps1
 
 ```
 #################################################################################################################
